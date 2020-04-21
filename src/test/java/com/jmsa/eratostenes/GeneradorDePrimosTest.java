@@ -14,13 +14,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author jmsa
+ * @author jmsa 
  */
-public class CribaTest
+
+/* Se han modificado los test de acuerdo a la nueva definición de la clase.
+Hay que crear un objeto antes de poder generar los primos. ¿Algo que mejorar en
+la clase para poder mejorar los test?
+*/ 
+public class GeneradorDePrimosTest
 {
     
-    public CribaTest()
+    public GeneradorDePrimosTest()
     {
+
     }
 
     @org.junit.jupiter.api.BeforeAll
@@ -46,7 +52,7 @@ public class CribaTest
 
 
     /**
-     * Test of generarPrimos method, of class Criba.
+     * Test of GeneradorDePrimos method, of class GeneradorDePrimos.
      */
     @org.junit.jupiter.api.Test
     public void testGenerarPrimosCero()
@@ -54,7 +60,9 @@ public class CribaTest
         System.out.println("generarPrimos");
         int max = 0;
         int  expResult = 0;
-        int[] result = Criba.generarPrimos(max);
+        GeneradorDePrimos generador = new GeneradorDePrimos(max);
+        int[] result = generador.getPrimos();
+        
         assertEquals(expResult, result.length);
         //assertArrayEquals(expected, actual);
         // TODO review the generated test code and remove the default call to fail.
@@ -67,7 +75,8 @@ public class CribaTest
         System.out.println("generarPrimos");
         int max = 2;
         int expResult = 1;
-        int[] result = Criba.generarPrimos(max);
+        GeneradorDePrimos generador = new GeneradorDePrimos(max);
+        int[] result = generador.getPrimos();
         assertEquals(expResult, result.length);
         assertEquals(result[0], 2);
         //assertArrayEquals(expResult, result.length);
@@ -80,7 +89,8 @@ public class CribaTest
         System.out.println("generarPrimos");
         int max = 3;
         int expResult = 2;
-        int[] result = Criba.generarPrimos(max);
+        GeneradorDePrimos generador = new GeneradorDePrimos(max);
+        int[] result = generador.getPrimos();
         assertEquals(expResult, result.length);
         assertEquals(result[0], 2);
         assertEquals(result[1], 3);
@@ -88,13 +98,15 @@ public class CribaTest
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
+    
     @org.junit.jupiter.api.Test
     public void testGenerarPrimos100()
     {
         System.out.println("generarPrimos");
         int max = 100;
         int expResult = 25;
-        int[] result = Criba.generarPrimos(max);
+        GeneradorDePrimos generador = new GeneradorDePrimos(max);
+        int[] result = generador.getPrimos();
         assertEquals(expResult, result.length);
         assertEquals(result[24], 97);
         //assertArrayEquals(expResult, result.length);

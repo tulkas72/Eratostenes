@@ -18,7 +18,8 @@ public class Primos
     public static void main(String[] args)
     {
         // TODO code application logic here
-        int[] caja = Criba.generarPrimos(100);
+        GeneradorDePrimos generador = new GeneradorDePrimos(100);
+        int[] caja = generador.getPrimos();
         for(int i = 0; i < caja.length; i++)
         {
             // Imprimimos los elementos del array en pantalla.
