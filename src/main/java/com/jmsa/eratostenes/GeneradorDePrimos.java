@@ -17,44 +17,53 @@ public class GeneradorDePrimos
      * @param max es el valor máximo
      * @return Vector de números primos
      */
-    private static int dim;
+    
     private static boolean esPrimo[];
     private static int primos[];
     
     
-    private static void inicializarCriba(int max)
+    private static void inicializarCandidatos(int max)
     {
         int i;
-        dim = max + 1; // Tamaño del array
-        esPrimo = new boolean[dim];
-        // Inicializar el array
-        for (i = 0; i < dim; i++)
+       // Tamaño del array max +1
+        esPrimo = new boolean[max + 1];
+        
+        // Eliminar el 0 y el 1, que no son primos
+        esPrimo[0] = esPrimo[1] = false;
+        // Inicializar resto del array
+        for (i = 2; i < esPrimo.length; i++)
         {
             esPrimo[i] = true;
         }
-        // Eliminar el 0 y el 1, que no son primos
-        esPrimo[0] = esPrimo[1] = false;
+        
+        
     }
     
-    private static void cribar()
+    private static void eliminarMultiplos()
     {
         int i, j;
-        for (i = 2; i < Math.sqrt(dim) + 1; i++)
+        for (i = 2; i < maxFactor(); i++)
         {
             if (esPrimo[i])
             {
                 // Eliminar los múltiplos de i
-                for (j = 2 * i; j < dim; j += i)
+                for (j = 2 * i; j < esPrimo.length; j += i)
                 {
                     esPrimo[j] = false;
                 }
             }
         }
     }
-    private static void rellenarPrimos()
+
+    private static int maxFactor()
+    {
+        return (int) Math.sqrt(esPrimo.length) + 1;
+    }
+    
+    private static void obtenerCandidatosNoEliminados()
     {
         int i, j, cuenta = 0;
-        for (i = 0; i < dim; i++)
+        for (i = 0; i < esPrimo.length; i++)
         {
             if (esPrimo[i])
             {
@@ -63,7 +72,7 @@ public class GeneradorDePrimos
         }
         // Rellenar el vector de números primos
         primos = new int[cuenta];
-        for (i = 0, j = 0; i < dim; i++)
+        for (i = 0, j = 0; i < esPrimo.length; i++)
         {
             if (esPrimo[i])
             {
@@ -80,9 +89,9 @@ public class GeneradorDePrimos
         }
         else
         {
-            inicializarCriba(max);
-            cribar();
-            rellenarPrimos();
+            inicializarCandidatos(max);
+            eliminarMultiplos();
+            obtenerCandidatosNoEliminados();
             return primos;
         }
     }
